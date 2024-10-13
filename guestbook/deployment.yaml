@@ -1,15 +1,21 @@
-apiVersion: argoproj.io/v1alpha1
-kind: Application
+apiVersion: apps/v1
+kind: Deployment
 metadata:
-  name: guestbook
+  name: guestbook-ui
 spec:
-  destination:
-    name: ''
-    namespace: guestbook
-    server: 'https://kubernetes.default.svc'
-  source:
-    path: guestbook
-    repoURL: 'https://github.com/honestman90/argocd-example-apps/'
-    targetRevision: HEAD
-  sources: []
-  project: default
+  replicas: 1
+  revisionHistorylimit: 3
+  selector:
+    matchlabels:
+      app: guestbook-ui
+  template: 
+    metadata:
+      labels:
+        app: guestbook-ui
+    spec:
+      containers:
+      - image: gcr.io/heptio-images/ks-guestbook-demo:0.2
+        name: guestbook-ui
+        ports:
+        - containerPort: 80
+  
