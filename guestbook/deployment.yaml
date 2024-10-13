@@ -4,11 +4,11 @@ metadata:
   name: guestbook-ui
 spec:
   replicas: 1
-  revisionHistorylimit: 3
+  revisionHistoryLimit: 3
   selector:
-    matchlabels:
+    matchLabels:
       app: guestbook-ui
-  template: 
+  template:
     metadata:
       labels:
         app: guestbook-ui
@@ -18,4 +18,5 @@ spec:
         name: guestbook-ui
         ports:
         - containerPort: 80
+
   
